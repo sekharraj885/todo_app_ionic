@@ -1,0 +1,123 @@
+<ion-content>
+  <!-- <ion-scroll scrollY="true" style="height: 100%"> -->
+  <ion-card>
+    <ion-card-header> Add New Task </ion-card-header>
+    <ion-card-content>
+      <form [formGroup]="taskForm" (ngSubmit)="saveTask()">
+        <ion-item>
+          <ion-label position="floating">Title</ion-label>
+          <ion-input type="text" formControlName="title"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-select
+            class="always-flip"
+            toggleIcon="caret-down-sharp"
+            interface="popover"
+            label="Category"
+            formControlName="category"
+          >
+            <ion-select-option value="Study">Study</ion-select-option>
+            <ion-select-option value="Health">Health</ion-select-option>
+            <ion-select-option value="Work">Work</ion-select-option>
+            <ion-select-option value="Shopping">Shopping</ion-select-option>
+            <ion-select-option value="Personal">Personal</ion-select-option>
+            <ion-select-option value="Fitness">Fitness</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Description</ion-label>
+          <ion-textarea formControlName="description"></ion-textarea>
+        </ion-item>
+        <!-- <ion-item>
+          <ion-label>Due Date</ion-label>
+          <ion-input formControlName="dueDate" #datetime type="text"  readonly></ion-input>
+          <ion-datetime-button  datetime="datetime"></ion-datetime-button>
+          <ion-modal [keepContentsMounted]="true">
+            <ng-template>
+              <ion-datetime  [showDefaultButtons]="true"  id="datetime"(ionChange)="dateTimeChanged($event)"></ion-datetime>
+            </ng-template>
+          </ion-modal>
+        </ion-item>         -->
+
+        <!-- <ion-item>
+          <ion-label >Due Date</ion-label>
+          <ion-datetime-button datetime="datetime"></ion-datetime-button>
+          <ion-modal [showBackdrop]="true" [animated]="true" [keyboardClose]="true" [backdropDismiss]="true" [keepContentsMounted]="true">
+            <ng-template>
+              <ion-datetime
+                [showDefaultButtons]="true"
+                id="datetime"
+                display-format="MMM D, YYYY HH:mm"
+                (ionChange)="dateTimeChanged($event)"
+              ></ion-datetime>
+            </ng-template>
+          </ion-modal>
+        </ion-item> -->
+
+        <!-- <ion-item>
+          <ion-label position="stacked">Choose a date and time</ion-label>
+          <ion-datetime
+            display-format="MM/DD/YYYY HH:mm"
+            formControlName="dueDate"
+          ></ion-datetime>
+        </ion-item> -->
+
+        <ion-item>
+          <ion-label position="stacked">Due Date</ion-label>
+          <div class="datetime-field">
+            <ion-input
+              
+              formControlName="dueDate"
+              type="text"
+              [value]="formattedDueDate"
+              readonly></ion-input>
+            <ion-icon
+              class="calendar-icon"
+              name="calendar"
+              (click)="showDatePicker = !showDatePicker"
+            ></ion-icon>
+          </div>
+          <ion-datetime
+            *ngIf="showDatePicker"
+            formControlName="dueDate"
+            display-format="MMM D, YYYY HH:mm"
+            (ionChange)="dateTimeChanged($event)"
+          ></ion-datetime>
+        </ion-item>
+        <ion-item>
+          <ion-select
+            class="always-flip"
+            toggleIcon="caret-down-sharp"
+            interface="popover"
+            label="Priority"
+            formControlName="priority"
+          >
+            <ion-select-option value="High">High</ion-select-option>
+            <ion-select-option value="Medium">Medium</ion-select-option>
+            <ion-select-option value="Low">Low</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-select
+            class="always-flip"
+            toggleIcon="caret-down-sharp"
+            interface="popover"
+            label="Status"
+            formControlName="status"
+          >
+            <ion-select-option value="To Do">To Do</ion-select-option>
+            <ion-select-option value="In Progress"
+              >In Progress</ion-select-option
+            >
+            <ion-select-option value="Completed">Completed</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <div style="display: flex; justify-content: space-between">
+          <ion-button [routerLink]="'/home'">Back</ion-button>
+          <ion-button type="submit">Save Task</ion-button>
+        </div>
+      </form>
+    </ion-card-content>
+  </ion-card>
+  <!-- </ion-scroll> -->
+</ion-content>

@@ -1,0 +1,35 @@
+<ion-content>
+  <ion-grid>
+    <ion-row class="ion-align-items-center">
+      <ion-col size-md="6" size-lg="4">
+        <!-- Button on the left end -->
+        <ion-button [routerLink]="'/new-task'" color="primary" expand="start"
+          >Add Task</ion-button
+        >
+      </ion-col>
+      <ion-col size-md="6" size-lg="4" class="ion-text-end">
+        <!-- Button on the right end -->
+        <ion-button (click)="logoutUser()" color="danger">Log Out</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-list *ngFor="let task of myTasks">
+      <ion-item>
+        <ion-label>{{ task.title }}</ion-label>
+        <!-- <ion-label>{{task.status}}</ion-label> -->
+        <!-- <ion-icon
+          name="ellipsis-vertical-outline"
+          (click)="presentActionSheet(task)"
+        ></ion-icon> -->
+        <!-- <ion-icon name="trash-outline" (click)="deleteTask(task)"></ion-icon> -->
+        <ion-icon (click)="presentPopover($event)" name="ellipsis-vertical-outline"></ion-icon>
+        <ion-popover #popover [isOpen]="isOpen" (didDismiss)="isOpen = false">
+          <ng-template>
+            <ion-content class="ion-padding" (click)="editTask(task,$event)">Edit</ion-content>
+            <ion-content class="ion-padding" (click)="finishTask(task,$event)">Completed</ion-content>
+            <ion-content class="ion-padding"(click)="deleteTask(task,$event)">Delete</ion-content>
+          </ng-template>
+        </ion-popover>
+      </ion-item>
+    </ion-list>
+  </ion-grid>
+</ion-content>
